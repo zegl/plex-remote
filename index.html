@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
         <title>GusTV Remote</title>
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <meta content='initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport'>
+        <meta content="width=device-width" name="viewport">
 
         <style type="text/css">
+
+            html, body {
+                background: black;
+                color: white;
+                font-size: 40px;
+            }
+
             table {
-                max-width: 200px;
                 text-align: center;
-                font-size: 50px;
                 margin: 0 auto;
             }
 
             i {
                 background: lightgreen;
-                width: 50px;
+                width: 40px;
+                height: 40px;
                 display: block;
-                padding: 10px;
+                padding: 5px;
                 border-radius: 10px;
+                margin: 5px;
             }
         </style>
 
@@ -26,8 +34,6 @@
 
             var request = function(action)
             {
-                console.log(action);
-
                 var server = "192.168.0.101";
                 var client = "192.168.0.102";
 
@@ -91,7 +97,7 @@
             </tr>
         </table>
 
-        <hr/>
+        <br>
 
         <table class="buttons row-2">
             <tr>

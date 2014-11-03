@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <title>GusTV Remote</title>
+
+        <style type="text/css">
+            table {
+                max-width: 200px;
+                text-align: center;
+                font-size: 50px;
+                margin: 0 auto;
+            }
+
+            i {
+                background: lightgreen;
+                width: 50px;
+                display: block;
+                padding: 10px;
+                border-radius: 10px;
+            }
+        </style>
+
+        <script type="text/javascript">
+
+            var request = function(action)
+            {
+                console.log(action);
+
+                var server = "192.168.0.101";
+                var client = "192.168.0.102";
+
+                var url = "http://" + server + ":32400/system/players/" + client + "/" + action;
+
+                var xmlHttp = null;
+                xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("GET", url, false);
+                xmlHttp.send(null);
+            };
+
+            var volume = 50;
+
+            window.addEventListener("click", function(e) {
+
+                window.e = e;
+
+                if (e.target.getAttribute("action")) {
+                    var action = e.target.getAttribute("action");
+                    request(action);
+                }
+
+                if (e.target.getAttribute("volume")) {
+                    var vol = e.target.getAttribute("volume");
+
+                    volume += parseInt(e.target.getAttribute("volume"));
+
+                    if (volume < 0) {
+                        volume = 0;
+                    }
+
+                    if (volume > 100) {
+                        volume = 100;
+                    }
+
+                    request("application/setVolume?level=" + volume);
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <table class="buttons row-3">
+            <tr>
+                <td><i class="fa fa-undo" action="navigation/back"></i></td>
+                <td><i class="fa fa-caret-up" action="navigation/moveUp"></i></td>
+                <td><i class="fa fa-list" action="navigation/contextMenu"></i></td>
+            </tr>
+        </table>
+
+        <table class="buttons row-3">
+            <tr>
+                <td><i class="fa fa-caret-left" action="navigation/moveLeft"></i></td>
+                <td><i class="fa fa-circle" action="navigation/select"></i></td>
+                <td><i class="fa fa-caret-right" action="navigation/moveRight"></i></td>
+            </tr>
+        </table>
+
+        <table class="buttons row-1">
+            <tr>
+                <td><i class="fa fa-caret-down" action="navigation/moveDown"></i></td>
+            </tr>
+        </table>
+
+        <hr/>
+
+        <table class="buttons row-2">
+            <tr>
+                <td><i class="fa fa-volume-down" volume="-10"></i></td>
+                <td><i class="fa fa-volume-up" volume="10"></i></td>
+            </tr>
+        </table>
+
+        <table class="buttons row-5">
+            <tr>
+                <td><i class="fa fa-fast-backward" action="playback/bigStepBack"></i></td>
+                <td><i class="fa fa-backward" action="playback/stepBack"></i></td>
+                <td><i class="fa fa-play" action="playback/play"></i></td>
+                <td><i class="fa fa-forward" action="playback/stepForward"></i></td>
+                <td><i class="fa fa-fast-forward" action="playback/bigStepForward"></i></td>
+            </tr>
+        </table>
+
+        <table class="buttons row-2">
+            <tr>
+                <td><i class="fa fa-font" action="navigation/toggleOSD"</i></td>
+                <td><i class="fa fa-stop" action="navigation/stop"></i></td>
+            </tr>
+        </table>
+    </body>
+</html>
